@@ -16,6 +16,10 @@ app.get('/users', async (req, res) => {
     const {rows} = await pool.query('SELECT * FROM users');
     res.json(rows);
 });
+app.get('/users/:name', async (req, res) => {
+    const {rows} = await pool.query('SELECT * FROM users WHERE name = $1', [req.params.name]);
+    res.json(rows);
+});
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
